@@ -5,8 +5,8 @@ get '/' do
 end
 
 get '/:word' do
-  @word = params[:word]
-  @ana = Word.anagrams(params[:word])
+  @word = params[:word] # Needed for view
+  @ana = Word.anagrams(params[:word]) # needed for view
   erb :index
 end
 

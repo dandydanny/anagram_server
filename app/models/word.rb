@@ -2,13 +2,16 @@ require_relative '../../config/database'
 class Word < ActiveRecord::Base
 
   def self.anagrams(word)
-    user_word = word.split("").sort
-    ana = []
-    self.where("length(word)" == word.length).each do |w|
-      temp = w[:word].downcase.split("").sort
-      ana << w[:word] if user_word == temp
+    user_sorted_word = word.split("").sort.join
+    obj =  Word.find_all_by_sorted_word(user_sorted_word)
+    word_list = []
+
+    obj.each do |item|
+      word_list << item.word
     end
-    ana.join("\n")
+
+    word_list = word_list.join(", ")
   end
+
 end
 

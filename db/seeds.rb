@@ -4,9 +4,9 @@ require 'pry'
 data = []
 filename = File.dirname(__FILE__) + "/../app/words.txt"
 File.open(filename).each do |line|
-  data << line.chomp.split(',')
+  data << line.chomp
 end
 
-data.each do |row|
-  Word.create(word: row.first)
+data.each do |word|
+  Word.create(word: word, sorted_word: word.split("").sort.join)
 end
